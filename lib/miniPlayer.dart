@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:musiq_player/song_page.dart';
 import 'package:musiq_player/textAnimation.dart';
 import 'package:on_audio_query/on_audio_query.dart';
-
 import 'getSongs.dart';
 
 class MiniPlayer extends StatefulWidget {

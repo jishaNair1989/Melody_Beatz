@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:musiq_player/new_box.dart';
 import 'package:musiq_player/playlistSong.dart';
-import 'package:on_audio_query/on_audio_query.dart';
-
 import 'db/functions/db_playlist.dart';
 import 'db/model/music_player.dart';
 
 class PlaylistScreen extends StatefulWidget {
-  PlaylistScreen({Key? key}) : super(key: key);
+  const PlaylistScreen({Key? key}) : super(key: key);
 
   @override
   State<PlaylistScreen> createState() => _PlaylistScreenState();

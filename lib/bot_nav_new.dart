@@ -21,7 +21,7 @@ class _BottomNavigationState extends State<BottomNav> {
   final screens = [
     const MusicHomeScreen(),
     const FavoriteScreen(),
-    PlaylistScreen(),
+    const PlaylistScreen(),
   ];
   @override
   Widget build(BuildContext context) {

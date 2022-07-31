@@ -9,7 +9,6 @@ import 'package:on_audio_query/on_audio_query.dart';
 
 import 'db/functions/db_playlist.dart';
 import 'db/model/music_player.dart';
-import 'fav_butn.dart';
 import 'getSongs.dart';
 
 class PlaylistData extends StatefulWidget {
@@ -50,6 +49,7 @@ class _PlaylistDataState extends State<PlaylistData> {
                     Lottie.asset(
                       'assets/images/playlistLottie.json',width: 200,height: 200,
                       fit: BoxFit.cover,
+
                    ),
                     Text(widget.playlist.name.toUpperCase(),
                         style: const TextStyle(

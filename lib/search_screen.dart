@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:musiq_player/new_box.dart';
 import 'package:musiq_player/song_page.dart';
@@ -29,7 +31,7 @@ class SearchScreen extends StatelessWidget {
             Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
-              style: TextStyle(height: 1),
+              style: const TextStyle(height: 1),
               decoration: InputDecoration(
                   labelText: 'Search',
                   suffixIcon: const Icon(Icons.search),

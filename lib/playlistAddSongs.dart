@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/get_utils.dart';
 import 'package:musiq_player/new_box.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -86,8 +85,8 @@ class _SongListPageState extends State<SongListPage> {
 
                                 child: ListTile(
                                   onTap: () {},
-                                  iconColor: Color.fromARGB(255, 0, 0, 0),
-                                  textColor: Color.fromARGB(255, 0, 0, 0),
+                                  iconColor: const Color.fromARGB(255, 0, 0, 0),
+                                  textColor: const Color.fromARGB(255, 0, 0, 0),
                                   leading: QueryArtworkWidget(
                                     id: item.data![index].id,
                                     type: ArtworkType.AUDIO,
@@ -98,8 +97,12 @@ class _SongListPageState extends State<SongListPage> {
                                         Radius.circular(0)),
                                   ),
                                   title:
-                                  Text(item.data![index].displayNameWOExt),
-                                  subtitle: Text("${item.data![index].artist}"),
+                                  SingleChildScrollView(
+                                      scrollDirection:Axis.horizontal,
+                                      child: Text(item.data![index].displayNameWOExt)),
+                                  subtitle: SingleChildScrollView(
+                                      scrollDirection:Axis.horizontal,
+                                      child: Text("${item.data![index].artist}")),
                                   trailing: IconButton(
                                       onPressed: () {
                                         setState((){

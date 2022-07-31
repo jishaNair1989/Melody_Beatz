@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:musiq_player/db/functions/db_playlist.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -96,12 +95,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 onPressed: () {
                                   _sendingMails();
                                 },
-                                child: Text('MAIL')),
+                                child: const Text('MAIL')),
                             title: ElevatedButton(
                                 onPressed: () {
                                   _sendingSMS();
                                 },
-                                child: Text(
+                                child: const Text(
                                   'MESSAGE',
                                   maxLines: 1,
                                 ))),
@@ -130,7 +129,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 //       title:ListView (
                 //           children:[ Text("")],),));
               },
-              title: Text('PRIVACY POLICY'),
+              title: const Text('PRIVACY POLICY'),
             ),
             ListTile(
               leading: const Icon(
