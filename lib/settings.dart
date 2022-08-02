@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:musiq_player/db/functions/db_playlist.dart';
+import 'package:musiq_player/shareLink.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -182,12 +183,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
             ),
             ListTile(
-              onTap: () async {},
+              onTap: () async {
+                shareLink(context);
+              },
               leading: const Icon(
                 Icons.share_outlined,
                 color: Colors.black54,
               ),
               title: const Text('SHARE'),
+
             ),
             ListTile(
               leading: const Icon(

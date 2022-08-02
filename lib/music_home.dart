@@ -27,8 +27,9 @@ class _MusicHomeScreenState extends State<MusicHomeScreen> {
     requestPermission();
   }
 
-  void requestPermission() {
-    Permission.storage.request();
+  void requestPermission() async{
+   await Permission.storage.request();
+   setState((){});
   }
 
   @override

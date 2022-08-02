@@ -14,6 +14,7 @@ class PlaylistScreen extends StatefulWidget {
 }
 
 final nameController = TextEditingController();
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 class _PlaylistScreenState extends State<PlaylistScreen> {
   // late List<SongModel> playlistsong;
@@ -23,138 +24,137 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     // getAllPlaylist();
     return ValueListenableBuilder(
         valueListenable: Hive.box<MusicPlayer>('playlistDB').listenable(),
-        builder:(BuildContext context,Box<MusicPlayer> musicList,
-        Widget? child) {
+        builder:
+            (BuildContext context, Box<MusicPlayer> musicList, Widget? child) {
           return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Scaffold(
                 appBar: AppBar(
                   elevation: 0,
                   backgroundColor: Colors.transparent,
-                  title: const NewBox(child: Text('P L A Y L I S T',
-                    style: TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),),),),
+                  title: const NewBox(
+                    child: Text(
+                      'P L A Y L I S T',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
                 backgroundColor: Colors.transparent,
                 body: NewBox(
-                    child: Hive
-                        .box<MusicPlayer>('playlistDB')
-                        .isEmpty
+                    child: Hive.box<MusicPlayer>('playlistDB').isEmpty
                         ? Center(
-                      child: Column(children: [
-                        Lottie.asset(
-                          'assets/images/EMPTY.json',
-                          height: 200,
-                          width: 200,
-                        ),
-                        const Text(
-                          'No playlists found',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ]),
-                    )
-
-                        : ValueListenableBuilder(
-                        valueListenable: Hive.box<MusicPlayer>('playlistDB')
-                            .listenable(),
-                        builder: (BuildContext context,
-                            Box<MusicPlayer> musicList,
-                            Widget? child) {
-                          return GridView.builder(
-                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
+                            child: Column(children: [
+                              Lottie.asset(
+                                'assets/images/EMPTY.json',
+                                height: 200,
+                                width: 200,
                               ),
-                              itemCount: musicList.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                final data = musicList.values.toList()[index];
-                                return
-                                  Padding(
-                                    padding: const EdgeInsets.all(15.0),
-
-                                    child: InkWell(
-                                      child: NewBox(
-                                        // shape: RoundedRectangleBorder(
-                                        //     borderRadius: BorderRadius.circular(25)),
-                                        child: Card(
-                                          elevation: 0,
-                                          color: Colors.transparent,
-
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Column(
-
-                                                children: [
-                                                  Expanded(
-                                                    flex: 4,
-                                                    child: SingleChildScrollView(
-                                                        scrollDirection: Axis
-                                                            .horizontal,
-                                                        child: Text(
-                                                          data.name,
-                                                          style: const TextStyle(
-                                                              fontSize: 15),
-                                                        )),
+                              const Text(
+                                'No playlists found',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ]),
+                          )
+                        : ValueListenableBuilder(
+                            valueListenable: Hive.box<MusicPlayer>('playlistDB')
+                                .listenable(),
+                            builder: (BuildContext context,
+                                Box<MusicPlayer> musicList, Widget? child) {
+                              return GridView.builder(
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                  ),
+                                  itemCount: musicList.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    final data =
+                                        musicList.values.toList()[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.all(15.0),
+                                      child: InkWell(
+                                        child: NewBox(
+                                          // shape: RoundedRectangleBorder(
+                                          //     borderRadius: BorderRadius.circular(25)),
+                                          child: Card(
+                                            elevation: 0,
+                                            color: Colors.transparent,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(children: [
+                                                Expanded(
+                                                  flex: 4,
+                                                  child: SingleChildScrollView(
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      child: Text(
+                                                        data.name,
+                                                        style: const TextStyle(
+                                                            fontSize: 15),
+                                                      )),
+                                                ),
+                                                IconButton(
+                                                  icon: const Icon(
+                                                    Icons.delete_outlined,
+                                                    size: 25,
                                                   ),
-
-
-                                                  IconButton(
-                                                    icon: const Icon(
-                                                      Icons.delete_outlined,
-                                                      size: 25,
-                                                    ),
-                                                    onPressed: () {
-                                                      showDialog(
-                                                          context: context,
-                                                          builder: (context) {
-                                                            return AlertDialog(
-                                                              title: const Text(
-                                                                  'Delete Playlist'),
-                                                              content: const Text(
-                                                                  'Are you sure you want to delete this playlist?'),
-                                                              actions: <Widget>[
-                                                                TextButton(
-                                                                  child: const Text(
-                                                                      'Yes'),
-                                                                  onPressed: () {
-                                                                    musicList
-                                                                        .deleteAt(
-                                                                        index);
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                  },
-                                                                ),
-                                                                TextButton(
-                                                                  child: const Text(
-                                                                      'No'),
-                                                                  onPressed: () {
-                                                                    Navigator.pop(
-                                                                        context);
-                                                                  },
-                                                                )
-                                                              ],
-                                                            );
-                                                          });
-                                                    },
-                                                  ),
-                                                ]),
+                                                  onPressed: () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialog(
+                                                            title: const Text(
+                                                                'Delete Playlist'),
+                                                            content: const Text(
+                                                                'Are you sure you want to delete this playlist?'),
+                                                            actions: <Widget>[
+                                                              TextButton(
+                                                                child:
+                                                                    const Text(
+                                                                        'Yes'),
+                                                                onPressed: () {
+                                                                  musicList
+                                                                      .deleteAt(
+                                                                          index);
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                              ),
+                                                              TextButton(
+                                                                child:
+                                                                    const Text(
+                                                                        'No'),
+                                                                onPressed: () {
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                              )
+                                                            ],
+                                                          );
+                                                        });
+                                                  },
+                                                ),
+                                              ]),
+                                            ),
                                           ),
-                                        ),),
-                                      onTap: () {
-                                        Navigator.of(context)
-                                            .push(MaterialPageRoute(
-                                            builder: (context) {
-                                              return PlaylistData(
-                                                playlist: data,
-                                                folderindex: index,
-                                              );
-                                            }));
-                                      },
-                                    ),
-                                  );
-                              });
-                        })),
-
-
+                                        ),
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) {
+                                            return PlaylistData(
+                                              playlist: data,
+                                              folderindex: index,
+                                            );
+                                          }));
+                                        },
+                                      ),
+                                    );
+                                  });
+                            })),
                 floatingActionButton: ElevatedButton(
                   onPressed: () {
                     showDialog(
@@ -200,34 +200,35 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                                       height: 20,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment
-                                          .spaceEvenly,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         SizedBox(
                                             width: 100.0,
                                             child: ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
-                                                    primary: const Color
-                                                        .fromARGB(
-                                                        1, 200, 200, 200)),
+                                                    primary:
+                                                        const Color.fromARGB(
+                                                            1, 200, 200, 200)),
                                                 onPressed: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                child: const Text('Cancel'))
-
-                                        ),
+                                                child: const Text('Cancel'))),
                                         SizedBox(
                                             width: 100.0,
                                             child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  primary: const Color
-                                                      .fromARGB(
-                                                      1, 200, 200, 200)),
-                                              onPressed: () {
-                                                whenButtonClicked();
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: const Text('Save')) )
+                                                style: ElevatedButton.styleFrom(
+                                                    primary:
+                                                        const Color.fromARGB(
+                                                            1, 200, 200, 200)),
+                                                onPressed: () {
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    whenButtonClicked();
+                                                    Navigator.of(context).pop();
+                                                  }
+                                                },
+                                                child: const Text('Save')))
                                       ],
                                     ),
                                   ],
@@ -241,9 +242,8 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                   // backgroundColor: Colors.grey,
                   child: const Icon(Icons.add),
                 ),
-              )
-          );
-        } );
+              ));
+        });
   }
 
   Future<void> whenButtonClicked() async {

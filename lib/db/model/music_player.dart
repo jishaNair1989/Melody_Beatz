@@ -4,9 +4,6 @@ part 'music_player.g.dart';
 
 @HiveType(typeId: 1)
 class MusicPlayer extends HiveObject {
-  //box creation
-
-  //int? id;
 
   @HiveField(0)
   String name;

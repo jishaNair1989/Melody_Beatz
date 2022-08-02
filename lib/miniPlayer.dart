@@ -42,7 +42,7 @@ class _MiniPlayerState extends State<MiniPlayer> {
           );
         },
         iconColor:Colors.black,
-        textColor: Colors.grey,
+        textColor: Colors.black,
         leading: Padding(
           padding: const EdgeInsets.all(0),
           child: Container(
@@ -95,8 +95,8 @@ class _MiniPlayerState extends State<MiniPlayer> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
-                    primary: Colors.black45,
-                    onPrimary: Colors.grey),
+                    primary: Colors.amber[900],
+                    onPrimary: Colors.grey[200]),
                 onPressed: () async {
                   if (GetSongs.player.playing) {
                     await GetSongs.player.pause();
