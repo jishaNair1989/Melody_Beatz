@@ -222,11 +222,11 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                                                         const Color.fromARGB(
                                                             1, 200, 200, 200)),
                                                 onPressed: () {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
+                                                  // if (_formKey.currentState!
+                                                  //     .validate()) {
                                                     whenButtonClicked();
                                                     Navigator.of(context).pop();
-                                                  }
+                                                  // }
                                                 },
                                                 child: const Text('Save')))
                                       ],

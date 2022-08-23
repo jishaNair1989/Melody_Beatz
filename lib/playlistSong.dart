@@ -4,9 +4,7 @@ import 'package:lottie/lottie.dart';
 import 'package:musiq_player/new_box.dart';
 import 'package:musiq_player/playlistAddSongs.dart';
 import 'package:musiq_player/song_page.dart';
-
 import 'package:on_audio_query/on_audio_query.dart';
-
 import 'db/functions/db_playlist.dart';
 import 'db/model/music_player.dart';
 import 'getSongs.dart';

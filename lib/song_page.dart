@@ -59,7 +59,7 @@ class _SongPageScreenState extends State<SongPageScreen> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
+            child: ListView(
               children: [
                 const SizedBox(
                   height: 15,
@@ -168,80 +168,82 @@ class _SongPageScreenState extends State<SongPageScreen> {
                 ),
 
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 //start time,shuffle button,repeat button,end time
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(_position.toString().split(".")[0]),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          padding: const EdgeInsets.all(15),
-                          primary: Colors.transparent,
-                          onPrimary: Colors.black),
-                      onPressed: () {
-
-                          _isshuffle == false
-                              ? GetSongs.player.setShuffleModeEnabled(true)
-                              : GetSongs.player.setShuffleModeEnabled(false);
-
-                            const ScaffoldMessenger(
-                            child: SnackBar(content: Text('Shuffle Enabled')));
-                      },
-                      child: StreamBuilder<bool>(
-                          stream: GetSongs.player.shuffleModeEnabledStream,
-                          builder: (context, AsyncSnapshot snapshot) {
-                            _isshuffle = snapshot.data;
-                            if (_isshuffle) {
-                              return const Icon(
-                                Icons.shuffle,
-                                color: Colors.white,
-                                size: 25,
-                              );
-                            } else {
-                              return const Icon(
-                                Icons.shuffle,
-                                size: 25,
-                                color: Colors.black,
-                              );
-                            }
-                          }),
-                    ),
-                    ElevatedButton(
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(_position.toString().split(".")[0]),
+                      ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             elevation: 0,
+                            padding: const EdgeInsets.all(15),
                             primary: Colors.transparent,
                             onPrimary: Colors.black),
                         onPressed: () {
-                          GetSongs.player.loopMode == LoopMode.one
-                              ? GetSongs.player.setLoopMode(LoopMode.all)
-                              : GetSongs.player.setLoopMode(LoopMode.one);
-                          const ScaffoldMessenger(
-                              child: SnackBar(content: Text('Repeat changed')));
+
+                            _isshuffle == false
+                                ? GetSongs.player.setShuffleModeEnabled(true)
+                                : GetSongs.player.setShuffleModeEnabled(false);
+
+                              const ScaffoldMessenger(
+                              child: SnackBar(content: Text('Shuffle Enabled')));
                         },
-                        child: StreamBuilder<LoopMode>(
-                          stream: GetSongs.player.loopModeStream,
-                          builder: (context, snapshot) {
-                            final loopMode = snapshot.data;
-                            if (LoopMode.one == loopMode) {
-                              return const Icon(
-                                Icons.repeat_one,
-                                color: Colors.white,
-                                size: 25,
-                              );
-                            } else {
-                              return const Icon(
-                                Icons.repeat,
-                                size: 30,
-                              );
-                            }
+                        child: StreamBuilder<bool>(
+                            stream: GetSongs.player.shuffleModeEnabledStream,
+                            builder: (context, AsyncSnapshot snapshot) {
+                              _isshuffle = snapshot.data;
+                              if (_isshuffle) {
+                                return const Icon(
+                                  Icons.shuffle,
+                                  color: Colors.white,
+                                  size: 25,
+                                );
+                              } else {
+                                return const Icon(
+                                  Icons.shuffle,
+                                  size: 25,
+                                  color: Colors.black,
+                                );
+                              }
+                            }),
+                      ),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              primary: Colors.transparent,
+                              onPrimary: Colors.black),
+                          onPressed: () {
+                            GetSongs.player.loopMode == LoopMode.one
+                                ? GetSongs.player.setLoopMode(LoopMode.all)
+                                : GetSongs.player.setLoopMode(LoopMode.one);
+                            const ScaffoldMessenger(
+                                child: SnackBar(content: Text('Repeat changed')));
                           },
-                        )),
-                    Text(_duration.toString().split(".")[0])
-                  ],
+                          child: StreamBuilder<LoopMode>(
+                            stream: GetSongs.player.loopModeStream,
+                            builder: (context, snapshot) {
+                              final loopMode = snapshot.data;
+                              if (LoopMode.one == loopMode) {
+                                return const Icon(
+                                  Icons.repeat_one,
+                                  color: Colors.white,
+                                  size: 25,
+                                );
+                              } else {
+                                return const Icon(
+                                  Icons.repeat,
+                                  size: 30,
+                                );
+                              }
+                            },
+                          )),
+                      Text(_duration.toString().split(".")[0])
+                    ],
+                  ),
                 ),
 
                 NewBox(

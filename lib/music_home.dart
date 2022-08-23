@@ -10,28 +10,31 @@ import 'db/functions/db_fav.dart';
 import 'fav_butn.dart';
 import 'new_box.dart';
 
-class MusicHomeScreen extends StatefulWidget {
-  const MusicHomeScreen({Key? key}) : super(key: key);
-  static List<SongModel> song = [];
-  @override
-  State<MusicHomeScreen> createState() => _MusicHomeScreenState();
-}
-
 class _MusicHomeScreenState extends State<MusicHomeScreen> {
-  final _audioQuery = OnAudioQuery();
-  // final AudioPlayer _audioPlayer = AudioPlayer();
-
   @override
   void initState() {
     super.initState();
     requestPermission();
   }
+  final _audioQuery = OnAudioQuery();
 
-  void requestPermission() async{
-   await Permission.storage.request();
-   setState((){});
-  }
+  // final AudioPlayer _audioPlayer = AudioPlayer();
 
+  requestPermission() async{
+    await Permission.storage.request();
+    setState((){});
+    // PermissionStatus status= await Permission.storage.request();
+    // if(status.isDenied == true)
+    // {
+    //   requestPermission();
+    // }
+    // else\
+    // {
+    //   return true;
+    // }
+    // // setState((){});
+    //
+    }
   @override
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
@@ -215,4 +218,11 @@ class _MusicHomeScreenState extends State<MusicHomeScreen> {
       );
     });
   }
+}
+
+class MusicHomeScreen extends StatefulWidget {
+  const MusicHomeScreen({Key? key}) : super(key: key);
+  static List<SongModel> song = [];
+  @override
+  State<MusicHomeScreen> createState() => _MusicHomeScreenState();
 }
